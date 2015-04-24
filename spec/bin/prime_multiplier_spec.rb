@@ -1,8 +1,10 @@
 require 'spec_helper'
 
-describe 'prime_multiplier command' do
-  it 'will build a balanced table of prime products and print to screen' do
-    expect(`ruby #{Dir.pwd}/bin/table_time --primes 10`).to eql expected_output
+describe 'table time command' do
+  context '--primes' do
+    it 'will build a balanced table of prime products and print to screen' do
+      expect(`ruby #{Dir.pwd}/bin/table_time --primes 10`).to eql expected_output
+    end
   end
 
   def expected_output
