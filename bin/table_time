@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'table_time'
+
+TableTime::Cli.new.call
