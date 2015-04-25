@@ -2,11 +2,11 @@
 
 A utility for generating and formatting tabular data.
 
-An example is included in the form of a Prime Product table
+Included are tables for the product of primes and fibs respectively
 
 ## Usage
 
-At the time of writing there is a single table generator for the product of primes at x y. Supply the number or primes to use:
+### Primes
 
     bundle exec bin/tabletime --primes 10
 
@@ -23,6 +23,23 @@ At the time of writing there is a single table generator for the product of prim
     19 | 38 57  95 133 209 247 323 361 437 551
     23 | 46 69 115 161 253 299 391 437 529 667
     29 | 58 87 145 203 319 377 493 551 667 841
+
+### Fibs
+
+    bundle exec bin/tabletime --fibs 10
+
+       | 0  1  1  2   3   5   8  13  21   34
+    ---+------------------------------------
+     0 | 0  0  0  0   0   0   0   0   0    0
+     1 | 0  1  1  2   3   5   8  13  21   34
+     1 | 0  1  1  2   3   5   8  13  21   34
+     2 | 0  2  2  4   6  10  16  26  42   68
+     3 | 0  3  3  6   9  15  24  39  63  102
+     5 | 0  5  5 10  15  25  40  65 105  170
+     8 | 0  8  8 16  24  40  64 104 168  272
+    13 | 0 13 13 26  39  65 104 169 273  442
+    21 | 0 21 21 42  63 105 168 273 441  714
+    34 | 0 34 34 68 102 170 272 442 714 1156
 
 ### Extending
 
