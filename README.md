@@ -8,7 +8,7 @@ An example is included in the form of a Prime Product table
 
 At the time of writing there is a single table generator for the product of primes at x y. Supply the number or primes to use:
 
-    bundle exec bin/table_time --primes 10
+    bundle exec bin/tabletime --primes 10
 
 
        |  2  3   5   7  11  13  17  19  23  29
