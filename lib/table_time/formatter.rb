@@ -2,9 +2,6 @@ module TableTime
   class Formatter
     def initialize(table)
       @table = table
-
-      @y_width = cell_width yaxis.max
-      @x_width = cell_width value_at(xaxis.length-1, yaxis.length-1)
     end
 
     def render
@@ -17,14 +14,14 @@ module TableTime
 
     private
 
-    attr_reader :table, :y_width, :x_width
+    attr_reader :table
 
     def header
       [].tap do |head|
         head << ' ' * cell_width(yaxis.max)
         head << '|'
         xaxis.each_with_index do |value, x|
-          width = cell_width(value_at(x, yaxis.length-1))
+          width = column_width(x)
           head << render_cell(width: width, value: value)
         end
       end
@@ -35,7 +32,7 @@ module TableTime
         divider << '-' * cell_width(yaxis.max)
         divider << '+'
         xaxis.each_with_index do |_, x|
-          width = cell_width(value_at(x, yaxis.length-1))
+          width = column_width(x)
           divider << ('-' * width)
         end
       end
@@ -47,7 +44,7 @@ module TableTime
           row << render_cell(width: cell_width(yaxis.max), value: value, method: :around)
           row << '|'
           xaxis.each_with_index do |_, x|
-            width = cell_width(value_at(x, yaxis.length-1))
+            width = column_width(x)
             row << render_cell(width: width, value: table.value_at(x, y))
           end
         end
@@ -62,6 +59,12 @@ module TableTime
           table << row
         end
       end
+    end
+
+    def column_width(col, offset=1)
+      (yaxis.each_with_index.map do |_, y|
+        value_at(col, y)
+      end << xaxis[col]).max.to_s.length + offset
     end
 
     def cell_width(num, offset=1)
