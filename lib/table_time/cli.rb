@@ -9,6 +9,9 @@ module TableTime
         option.on('--primes Integer') do |value|
           @options[:num_primes] = value.to_i
         end
+        option.on('--fibs Integer') do |value|
+          @options[:num_fibs] = value.to_i
+        end
         option.on('--version') do
           puts "Table Time. Version: #{VERSION}"
           exit
@@ -17,9 +20,20 @@ module TableTime
     end
 
     def call
-      primes = Util::Prime.take @options[:num_primes]
-      table = Table::SymmetricProduct.new primes
-      Formatter.new(table).render
+      sets = []
+
+      if @options[:num_primes]
+        sets << Util::Prime.take(@options[:num_primes])
+      end
+
+      if @options[:num_fibs]
+        sets << Util::Fibonacci.take(@options[:num_fibs])
+      end
+
+      sets.each do |set|
+        table = Table::SymmetricProduct.new set
+        Formatter.new(table).render
+      end
     end
   end
 end

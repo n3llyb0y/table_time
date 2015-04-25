@@ -3,11 +3,23 @@ require 'spec_helper'
 describe 'table time command' do
   context '--primes' do
     it 'will build a balanced table of prime products and print to screen' do
-      expect(`ruby #{Dir.pwd}/bin/tabletime --primes 10`).to eql expected_output
+      expect(`ruby #{Dir.pwd}/bin/tabletime --primes 10`).to eql prime_output
     end
   end
 
-  def expected_output
+  context '--fibs' do
+    it 'will build a balanced table of fibonacci products and print to screen' do
+      expect(`ruby #{Dir.pwd}/bin/tabletime --fibs 10`).to eql fib_output
+    end
+  end
+
+  context '--primes --fibs' do
+    it 'will output for both tables' do
+      expect(`ruby #{Dir.pwd}/bin/tabletime --primes 10 --fibs 10`).to include prime_output+fib_output
+    end
+  end
+
+  def prime_output
     "   |  2  3   5   7  11  13  17  19  23  29\n" \
     "---+--------------------------------------\n" \
     " 2 |  4  6  10  14  22  26  34  38  46  58\n" \
@@ -21,4 +33,21 @@ describe 'table time command' do
     "23 | 46 69 115 161 253 299 391 437 529 667\n" \
     "29 | 58 87 145 203 319 377 493 551 667 841\n"
   end
+
+  def fib_output
+     "   | 0  1  1  2   3   5   8  13  21   34\n" \
+     "---+------------------------------------\n" \
+     " 0 | 0  0  0  0   0   0   0   0   0    0\n" \
+     " 1 | 0  1  1  2   3   5   8  13  21   34\n" \
+     " 1 | 0  1  1  2   3   5   8  13  21   34\n" \
+     " 2 | 0  2  2  4   6  10  16  26  42   68\n" \
+     " 3 | 0  3  3  6   9  15  24  39  63  102\n" \
+     " 5 | 0  5  5 10  15  25  40  65 105  170\n" \
+     " 8 | 0  8  8 16  24  40  64 104 168  272\n" \
+     "13 | 0 13 13 26  39  65 104 169 273  442\n" \
+     "21 | 0 21 21 42  63 105 168 273 441  714\n" \
+     "34 | 0 34 34 68 102 170 272 442 714 1156\n" \
+  end
+
+
 end
