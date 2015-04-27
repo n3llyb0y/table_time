@@ -45,7 +45,7 @@ module TableTime
           row << '|'
           xaxis.each_with_index do |_, x|
             width = column_width(x)
-            row << render_cell(width: width, value: table.value_at(x, y))
+            row << render_cell(width: width, value: value_at(x, y))
           end
         end
       end
@@ -63,12 +63,12 @@ module TableTime
 
     def column_width(col, offset=1)
       (yaxis.each_with_index.map do |_, y|
-        value_at(col, y)
-      end << xaxis[col]).max.to_s.length + offset
+        cell_width(value_at(col, y), offset)
+      end << cell_width(xaxis[col], offset)).max
     end
 
-    def cell_width(num, offset=1)
-      num.to_s.length + offset
+    def cell_width(val, offset=1)
+      val.to_s.length + offset
     end
 
     def render_cell(width:, value:, method: :before, offset: 1)
@@ -78,7 +78,7 @@ module TableTime
       when :before
         ' ' * (width - value.length) + value
       when :around
-        ' ' * (width - offset - value.length) + value + ' ' * offset
+        ' ' * (width - value.length - offset) + value + ' ' * offset
       else
         value
       end

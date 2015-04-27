@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    table_time (0.2)
+    table_time (0.3)
 
 GEM
   remote: https://www.rubygems.org/
